@@ -1,6 +1,7 @@
-import express, { urlencoded } from "express";
-import cors from "cors"
-import cookieParser from "cookie-parser"
+import express from "express";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+import router from "./routes/index.js";
 
 const app = express();
 
@@ -15,6 +16,5 @@ app.use(express.urlencoded({
 }))
 
 
-import router from "./routes/routes.js"
 app.use("foodapp/home", router);
 
