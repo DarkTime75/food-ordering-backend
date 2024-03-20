@@ -1,5 +1,5 @@
 import { Router } from "express";
-import validateOtp from "./controller";
+import validateOtp from "./controller.js";
 
 const validateOtpRouter = Router();
 
