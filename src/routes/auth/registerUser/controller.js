@@ -1,5 +1,5 @@
 const registerUser = async () => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         resolve("This is the response from the registerUser controller");
     });
 };

@@ -9,4 +9,4 @@ export default () => {
     app.use("/user/validate-otp", validateOtpRouter);
 
     return app;
-}
+};

@@ -5,7 +5,7 @@ const validateOtpRouter = Router();
 
 const handleValidateOtp = async (req, res) => {
     try {
-        const response = await validateOtp(item);
+        const response = await validateOtp();
         res.status(200).send({ hasError: false, data: response });
     } catch (err) {
         console.log(err);

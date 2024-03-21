@@ -5,10 +5,10 @@ const loginUserRouter = Router();
 
 const handleLoginUser = async (req, res) => {
     try {
-        const response = await loginUser(item);
+        const response = await loginUser();
         res.status(200).send({ hasError: false, data: response });
     } catch (err) {
-        console.log(err)
+        console.log(err);
         res.status(422).send({ hasError: true, error: err });
     }
 };
