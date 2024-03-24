@@ -1,5 +1,6 @@
 import { User } from "../../../../db/models/index.js";
 import jwt from "jsonwebtoken";
+import * as constants from "../../../constants/index.js";
 
 const registerUser = async (req, res) => {
     const response = { hasError: true, title: "Error", data: null, message: "An error occured while signing up" };
@@ -18,6 +19,11 @@ const registerUser = async (req, res) => {
 
         if (phoneNo.length !== 10) {
             response.message = "Phone number must be 10 digits long";
+            return response;
+        }
+
+        if (!email.match(constants.regex.EMAIL_REGEX)) {
+            response.message = "Invalid email address";
             return response;
         }
 
