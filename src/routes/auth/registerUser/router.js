@@ -4,13 +4,9 @@ import registerUser from "./controller.js";
 const registerUserRouter = Router();
 
 const handleRegisterUser = async (req, res) => {
-    try {
-        const response = await registerUser();
-        res.status(200).send({ hasError: false, data: response });
-    } catch (err) {
-        console.log(err);
-        res.status(422).send({ hasError: true, error: err });
-    }
+    const response = await registerUser(req, res);
+    const status = response.hasError ? 422 : 200;
+    res.status(status).send(response);
 };
 
 registerUserRouter.post("/", handleRegisterUser);
