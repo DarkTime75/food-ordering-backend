@@ -1,0 +1,1 @@
+export { default as validateOtpRouter } from "./validateOtp/router.js";

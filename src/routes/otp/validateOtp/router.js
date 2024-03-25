@@ -9,7 +9,7 @@ const handleValidateOtp = async (req, res) => {
         res.status(200).send({ hasError: false, data: response });
     } catch (err) {
         console.log(err);
-        res.status(422).send({ hasError: true, error: err });
+        res.status(500).send({ hasError: true, error: "Internal Server Error" });
     }
 };
 
