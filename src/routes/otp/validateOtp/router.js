@@ -1,16 +1,13 @@
 import { Router } from "express";
 import validateOtp from "./controller.js";
+import { StatusCodes } from "http-status-codes";
 
 const validateOtpRouter = Router();
 
 const handleValidateOtp = async (req, res) => {
-    try {
-        const response = await validateOtp();
-        res.status(200).send({ hasError: false, data: response });
-    } catch (err) {
-        console.log(err);
-        res.status(500).send({ hasError: true, error: "Internal Server Error" });
-    }
+    const response = await validateOtp(req, res);
+    const status = response.hasError ? StatusCodes.UNPROCESSABLE_ENTITY : StatusCodes.OK;
+    res.status(status).send(response);
 };
 
 validateOtpRouter.post("/", handleValidateOtp);
