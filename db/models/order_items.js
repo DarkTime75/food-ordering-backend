@@ -1,10 +1,9 @@
-import mongoose, { SchemaTypes } from "mongoose";
-const { Schema } = mongoose;
+import { Schema, SchemaTypes, model } from "mongoose";
 
-const order_itemsSchema = new Schema({
+const OrderItemsSchema = new Schema({
     order_id: { type: SchemaTypes.ObjectId, ref: "Order" },
     order_item: String,
     quantity: Number,
 }, { timestamps: true });
 
-export const Order = mongoose.model("OrderItems", order_itemsSchema);
+export const Order = model("OrderItems", OrderItemsSchema);
