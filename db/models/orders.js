@@ -1,4 +1,4 @@
-import mongoose, { SchemaTypes } from 'mongoose';
+import mongoose, { SchemaTypes } from "mongoose";
 const { Schema } = mongoose;
 
 const ordersSchema = new Schema({
@@ -8,4 +8,4 @@ const ordersSchema = new Schema({
     total_cost: Number,
 }, { timestamps: true });
 
-export const Order = mongoose.model('Order', ordersSchema);
+export const Order = mongoose.model("Order", ordersSchema);

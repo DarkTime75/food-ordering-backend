@@ -1,4 +1,4 @@
-import mongoose, { SchemaTypes } from 'mongoose';
+import mongoose, { SchemaTypes } from "mongoose";
 const { Schema } = mongoose;
 
 const order_itemsSchema = new Schema({
@@ -7,4 +7,4 @@ const order_itemsSchema = new Schema({
     quantity: Number,
 }, { timestamps: true });
 
-export const Order = mongoose.model('OrderItems', order_itemsSchema);
+export const Order = mongoose.model("OrderItems", order_itemsSchema);
