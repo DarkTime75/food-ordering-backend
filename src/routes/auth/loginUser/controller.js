@@ -1,35 +1,18 @@
 import { User } from "../../../../db/models/index.js";
 import jwt from "jsonwebtoken";
-import * as constants from "../../../constants/index.js";
+import { LoginUserSchema } from "../../../frameworks/schemaValidators/index.js";
+import { fromZodError } from "zod-validation-error";
+import { ZodError } from "zod";
 
 
 const loginUser = async (req, res) => {
     const response = { hasError: true, title: "Error", data: null, message: "An error occured while logging in" };
 
     try {
-        const { phoneNo, email, password } = req.body;
+        const { email, phoneNo, password } = LoginUserSchema.parse(req.body);
+
         if (!email && !phoneNo) {
-            response.message = "Either Email or phone number is required";
-            return response;
-        }
-
-        if (!password) {
-            response.message = "Password is required";
-            return response;
-        }
-
-        if (!email.match(constants.regex.EMAIL_REGEX)) {
-            response.message = "Invalid email address";
-            return response;
-        }
-
-        if (password.length < 8) {
-            response.message = "Password must be atleast 8 characters long";
-            return response;
-        }
-
-        if (phoneNo && phoneNo.length !== 10) {
-            response.message = "Phone number must be 10 digits long";
+            response.message = "Either Email or Phone number is required";
             return response;
         }
 
@@ -60,7 +43,13 @@ const loginUser = async (req, res) => {
         response.data = { token };
         return response;
     } catch (err) {
-        console.error(err);
+        if (err instanceof ZodError) {
+            const formattedError = fromZodError(err);
+            console.error(formattedError);
+            response.message = formattedError.details[0].message;
+        } else {
+            console.error(err);
+        }
         return response;
     }
 };

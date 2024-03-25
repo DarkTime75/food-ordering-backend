@@ -1,1 +1,0 @@
-export * as regex from "./regex.js";
