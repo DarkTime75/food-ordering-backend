@@ -1,12 +1,11 @@
-import mongoose, { ObjectId } from 'mongoose';
+import mongoose, { SchemaTypes } from 'mongoose';
 const { Schema } = mongoose;
 
 const ordersSchema = new Schema({
-    id: { type: ObjectId, ref: 'User' },
-    user_id: { type: String, match: /^[A-Za-z0-9\s]+$/ },
-    address_id: { type: String, match: /^[A-Za-z0-9\s]+$/ },
+    user_id: { type: SchemaTypes.ObjectId, ref: "User" },
+    // address_id: String,
     delivery_charge: Number,
-    total_cost: Number
-});
+    total_cost: Number,
+}, { timestamps: true });
 
 export const Order = mongoose.model('Order', ordersSchema);

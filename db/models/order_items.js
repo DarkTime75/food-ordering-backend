@@ -1,11 +1,10 @@
-import mongoose, { ObjectId } from 'mongoose';
+import mongoose, { SchemaTypes } from 'mongoose';
 const { Schema } = mongoose;
 
 const order_itemsSchema = new Schema({
-    id: { type: ObjectId, ref: 'User' },
-    order_id: { type: String, match: /^[A-Za-z0-9\s]+$/ },
-    order_item: { type: String, match: /^[A-Za-z0-9\s]+$/ },
-    quantity: Number
-});
+    order_id: { type: SchemaTypes.ObjectId, ref: "Order" },
+    order_item: String,
+    quantity: Number,
+}, { timestamps: true });
 
 export const Order = mongoose.model('OrderItems', order_itemsSchema);
