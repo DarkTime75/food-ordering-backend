@@ -32,8 +32,6 @@ const UsersSchema = new Schema({
     required: true,
     minlength: [8, "the password must have more than or equal to 8 characters"],
   },
-  // created_at: { type: Date, default: Date.now() },
-  // updated_at: { type: Date, default: Date.now() },
 }, { timestamps: true });
 
 UsersSchema.pre("save", function (next) {

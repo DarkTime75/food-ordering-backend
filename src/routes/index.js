@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { registerUserRouter, loginUserRouter, logoutUserRouter } from "./user/index.js";
-import { validateOtpRouter } from "./otp/index.js";
+import { validateOtpRouter, sendOtpRouter } from "./otp/index.js";
 import { requireAuth } from "../middlewares/index.js";
 
 export default () => {
@@ -9,15 +9,11 @@ export default () => {
     // User Routes
     app.use("/user/register", registerUserRouter);
     app.use("/user/login", loginUserRouter);
-    app.use("/user/logout", logoutUserRouter);
+    app.use("/user/logout", requireAuth, logoutUserRouter); // To logout, you must be logged in
 
     // OTP Routes
+    app.use("/otp/send", sendOtpRouter);
     app.use("/otp/validate", validateOtpRouter);
-
-    // Miscellaneous Routes
-    app.get("/auth-test", requireAuth, (req, res) => { // TODO: Remove before production
-        return res.json({ message: "Works" });
-    });
 
     return app;
 };

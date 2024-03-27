@@ -1,0 +1,691 @@
+import { Restaurant } from "../models/index.js";
+import { connect } from "mongoose";
+import "dotenv/config.js";
+
+const array = [{
+    "name": "Guendolen Benallack",
+    "cuisine": "Vietnamese",
+    "price": 433.53,
+    "rating": 3.2,
+    "imageURL": "http://dummyimage.com/149x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Wendall Moatt",
+    "cuisine": "Greek",
+    "price": 146.8,
+    "rating": 4.8,
+    "imageURL": "http://dummyimage.com/215x100.png/dddddd/000000",
+  }, {
+    "name": "Garrick Low",
+    "cuisine": "Mexican",
+    "price": 408.21,
+    "rating": 4.4,
+    "imageURL": "http://dummyimage.com/240x100.png/cc0000/ffffff",
+  }, {
+    "name": "Lyell Kennea",
+    "cuisine": "Mexican",
+    "price": 491.64,
+    "rating": 2.7,
+    "imageURL": "http://dummyimage.com/199x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Ronald De Cruce",
+    "cuisine": "Vietnamese",
+    "price": 154.41,
+    "rating": 4.9,
+    "imageURL": "http://dummyimage.com/199x100.png/cc0000/ffffff",
+  }, {
+    "name": "Parsifal Giraux",
+    "cuisine": "Chinese",
+    "price": 42.32,
+    "rating": 2.6,
+    "imageURL": "http://dummyimage.com/164x100.png/dddddd/000000",
+  }, {
+    "name": "Allan Hammerberg",
+    "cuisine": "Chinese",
+    "price": 140.37,
+    "rating": 4.9,
+    "imageURL": "http://dummyimage.com/233x100.png/cc0000/ffffff",
+  }, {
+    "name": "Jens Keenleyside",
+    "cuisine": "Vietnamese",
+    "price": 494.74,
+    "rating": 3.0,
+    "imageURL": "http://dummyimage.com/205x100.png/ff4444/ffffff",
+  }, {
+    "name": "Ava Calafato",
+    "cuisine": "Chinese",
+    "price": 152.54,
+    "rating": 4.6,
+    "imageURL": "http://dummyimage.com/130x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Abeu Lanham",
+    "cuisine": "Mexican",
+    "price": 241.38,
+    "rating": 1.4,
+    "imageURL": "http://dummyimage.com/152x100.png/cc0000/ffffff",
+  }, {
+    "name": "Erroll Zotto",
+    "cuisine": "Japanese",
+    "price": 344.11,
+    "rating": 1.4,
+    "imageURL": "http://dummyimage.com/118x100.png/ff4444/ffffff",
+  }, {
+    "name": "Kelbee Farfalameev",
+    "cuisine": "Italian",
+    "price": 410.17,
+    "rating": 4.2,
+    "imageURL": "http://dummyimage.com/150x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Chloette Golsby",
+    "cuisine": "Mexican",
+    "price": 20.36,
+    "rating": 2.0,
+    "imageURL": "http://dummyimage.com/191x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Pat O'Kynsillaghe",
+    "cuisine": "Japanese",
+    "price": 394.39,
+    "rating": 1.7,
+    "imageURL": "http://dummyimage.com/114x100.png/dddddd/000000",
+  }, {
+    "name": "Winna Boddington",
+    "cuisine": "Mexican",
+    "price": 189.2,
+    "rating": 2.0,
+    "imageURL": "http://dummyimage.com/121x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Josiah Ladlow",
+    "cuisine": "Japanese",
+    "price": 10.04,
+    "rating": 2.7,
+    "imageURL": "http://dummyimage.com/156x100.png/dddddd/000000",
+  }, {
+    "name": "Diana Camerati",
+    "cuisine": "Greek",
+    "price": 88.13,
+    "rating": 4.5,
+    "imageURL": "http://dummyimage.com/209x100.png/ff4444/ffffff",
+  }, {
+    "name": "Kelly Charley",
+    "cuisine": "American",
+    "price": 466.97,
+    "rating": 4.7,
+    "imageURL": "http://dummyimage.com/242x100.png/ff4444/ffffff",
+  }, {
+    "name": "Harriott Thouless",
+    "cuisine": "Japanese",
+    "price": 33.53,
+    "rating": 1.1,
+    "imageURL": "http://dummyimage.com/138x100.png/cc0000/ffffff",
+  }, {
+    "name": "Thurstan Paddingdon",
+    "cuisine": "Italian",
+    "price": 35.99,
+    "rating": 2.8,
+    "imageURL": "http://dummyimage.com/125x100.png/ff4444/ffffff",
+  }, {
+    "name": "Mair Gradley",
+    "cuisine": "Thai",
+    "price": 354.38,
+    "rating": 2.1,
+    "imageURL": "http://dummyimage.com/160x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Agatha McCrae",
+    "cuisine": "Mexican",
+    "price": 203.85,
+    "rating": 3.6,
+    "imageURL": "http://dummyimage.com/221x100.png/ff4444/ffffff",
+  }, {
+    "name": "Bamby Summerell",
+    "cuisine": "French",
+    "price": 141.62,
+    "rating": 2.1,
+    "imageURL": "http://dummyimage.com/228x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Brinna Dowell",
+    "cuisine": "Vietnamese",
+    "price": 293.85,
+    "rating": 4.5,
+    "imageURL": "http://dummyimage.com/151x100.png/ff4444/ffffff",
+  }, {
+    "name": "Marika Dabinett",
+    "cuisine": "Japanese",
+    "price": 278.12,
+    "rating": 4.4,
+    "imageURL": "http://dummyimage.com/146x100.png/ff4444/ffffff",
+  }, {
+    "name": "Valaria Nockells",
+    "cuisine": "Greek",
+    "price": 230.83,
+    "rating": 4.6,
+    "imageURL": "http://dummyimage.com/235x100.png/dddddd/000000",
+  }, {
+    "name": "Ardyth Trulock",
+    "cuisine": "French",
+    "price": 190.05,
+    "rating": 3.9,
+    "imageURL": "http://dummyimage.com/208x100.png/ff4444/ffffff",
+  }, {
+    "name": "Arlie Oslar",
+    "cuisine": "Mexican",
+    "price": 399.37,
+    "rating": 2.6,
+    "imageURL": "http://dummyimage.com/109x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Demetris Szanto",
+    "cuisine": "Italian",
+    "price": 69.81,
+    "rating": 3.7,
+    "imageURL": "http://dummyimage.com/218x100.png/dddddd/000000",
+  }, {
+    "name": "Quintana Stracey",
+    "cuisine": "Greek",
+    "price": 421.78,
+    "rating": 3.1,
+    "imageURL": "http://dummyimage.com/242x100.png/cc0000/ffffff",
+  }, {
+    "name": "Elna Coad",
+    "cuisine": "American",
+    "price": 179.29,
+    "rating": 1.9,
+    "imageURL": "http://dummyimage.com/201x100.png/ff4444/ffffff",
+  }, {
+    "name": "Lowe Ficken",
+    "cuisine": "Chinese",
+    "price": 73.18,
+    "rating": 2.9,
+    "imageURL": "http://dummyimage.com/198x100.png/dddddd/000000",
+  }, {
+    "name": "Vern Sylvester",
+    "cuisine": "Italian",
+    "price": 402.56,
+    "rating": 1.0,
+    "imageURL": "http://dummyimage.com/199x100.png/dddddd/000000",
+  }, {
+    "name": "Selia Feavearyear",
+    "cuisine": "Thai",
+    "price": 48.08,
+    "rating": 3.5,
+    "imageURL": "http://dummyimage.com/161x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Parke McAteer",
+    "cuisine": "Thai",
+    "price": 270.64,
+    "rating": 3.8,
+    "imageURL": "http://dummyimage.com/227x100.png/dddddd/000000",
+  }, {
+    "name": "Gleda Beeson",
+    "cuisine": "Indian",
+    "price": 396.45,
+    "rating": 2.8,
+    "imageURL": "http://dummyimage.com/190x100.png/ff4444/ffffff",
+  }, {
+    "name": "Gipsy Statefield",
+    "cuisine": "American",
+    "price": 151.17,
+    "rating": 3.5,
+    "imageURL": "http://dummyimage.com/132x100.png/dddddd/000000",
+  }, {
+    "name": "Flory Scrane",
+    "cuisine": "Mexican",
+    "price": 404.8,
+    "rating": 1.2,
+    "imageURL": "http://dummyimage.com/165x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Emmett Tuxsell",
+    "cuisine": "Indian",
+    "price": 187.14,
+    "rating": 1.0,
+    "imageURL": "http://dummyimage.com/235x100.png/dddddd/000000",
+  }, {
+    "name": "Eartha Wybrow",
+    "cuisine": "Chinese",
+    "price": 428.7,
+    "rating": 2.8,
+    "imageURL": "http://dummyimage.com/149x100.png/ff4444/ffffff",
+  }, {
+    "name": "Virgilio Iorillo",
+    "cuisine": "Italian",
+    "price": 484.06,
+    "rating": 3.7,
+    "imageURL": "http://dummyimage.com/149x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Doralyn Drewe",
+    "cuisine": "Vietnamese",
+    "price": 173.31,
+    "rating": 2.8,
+    "imageURL": "http://dummyimage.com/184x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Logan Faulder",
+    "cuisine": "Japanese",
+    "price": 474.48,
+    "rating": 1.4,
+    "imageURL": "http://dummyimage.com/228x100.png/dddddd/000000",
+  }, {
+    "name": "Skell Winterbotham",
+    "cuisine": "Greek",
+    "price": 374.13,
+    "rating": 1.7,
+    "imageURL": "http://dummyimage.com/131x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Talbot Werrett",
+    "cuisine": "Mexican",
+    "price": 146.17,
+    "rating": 4.5,
+    "imageURL": "http://dummyimage.com/119x100.png/cc0000/ffffff",
+  }, {
+    "name": "Felicdad Ygo",
+    "cuisine": "Indian",
+    "price": 147.52,
+    "rating": 2.5,
+    "imageURL": "http://dummyimage.com/157x100.png/dddddd/000000",
+  }, {
+    "name": "Brinna Reneke",
+    "cuisine": "Japanese",
+    "price": 402.17,
+    "rating": 2.4,
+    "imageURL": "http://dummyimage.com/229x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Ashlen Morley",
+    "cuisine": "Japanese",
+    "price": 155.9,
+    "rating": 3.5,
+    "imageURL": "http://dummyimage.com/170x100.png/dddddd/000000",
+  }, {
+    "name": "Selina Evitt",
+    "cuisine": "Indian",
+    "price": 220.27,
+    "rating": 5.0,
+    "imageURL": "http://dummyimage.com/242x100.png/cc0000/ffffff",
+  }, {
+    "name": "Devonne Coule",
+    "cuisine": "Vietnamese",
+    "price": 112.45,
+    "rating": 2.2,
+    "imageURL": "http://dummyimage.com/188x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Chrysa Ghidetti",
+    "cuisine": "French",
+    "price": 41.11,
+    "rating": 1.2,
+    "imageURL": "http://dummyimage.com/149x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Geno Junes",
+    "cuisine": "Thai",
+    "price": 204.35,
+    "rating": 2.9,
+    "imageURL": "http://dummyimage.com/156x100.png/ff4444/ffffff",
+  }, {
+    "name": "Marwin Huegett",
+    "cuisine": "American",
+    "price": 385.58,
+    "rating": 1.9,
+    "imageURL": "http://dummyimage.com/200x100.png/cc0000/ffffff",
+  }, {
+    "name": "Jobey Lampbrecht",
+    "cuisine": "Chinese",
+    "price": 27.56,
+    "rating": 2.6,
+    "imageURL": "http://dummyimage.com/247x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Marja Hitscher",
+    "cuisine": "Vietnamese",
+    "price": 175.5,
+    "rating": 4.1,
+    "imageURL": "http://dummyimage.com/168x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Minerva Blakebrough",
+    "cuisine": "Vietnamese",
+    "price": 423.94,
+    "rating": 4.0,
+    "imageURL": "http://dummyimage.com/168x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "George Favill",
+    "cuisine": "Italian",
+    "price": 47.23,
+    "rating": 4.9,
+    "imageURL": "http://dummyimage.com/250x100.png/cc0000/ffffff",
+  }, {
+    "name": "Chad Parrot",
+    "cuisine": "Greek",
+    "price": 387.34,
+    "rating": 1.7,
+    "imageURL": "http://dummyimage.com/164x100.png/ff4444/ffffff",
+  }, {
+    "name": "Gunter Happer",
+    "cuisine": "Greek",
+    "price": 427.61,
+    "rating": 2.0,
+    "imageURL": "http://dummyimage.com/202x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Aurthur Liversley",
+    "cuisine": "Thai",
+    "price": 289.65,
+    "rating": 2.3,
+    "imageURL": "http://dummyimage.com/213x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Barney Sudran",
+    "cuisine": "Chinese",
+    "price": 362.06,
+    "rating": 3.1,
+    "imageURL": "http://dummyimage.com/146x100.png/cc0000/ffffff",
+  }, {
+    "name": "Alejoa Stansbie",
+    "cuisine": "Greek",
+    "price": 292.02,
+    "rating": 4.6,
+    "imageURL": "http://dummyimage.com/119x100.png/dddddd/000000",
+  }, {
+    "name": "Roberta Itzkin",
+    "cuisine": "Thai",
+    "price": 61.38,
+    "rating": 1.4,
+    "imageURL": "http://dummyimage.com/234x100.png/dddddd/000000",
+  }, {
+    "name": "Sophi Manilove",
+    "cuisine": "Italian",
+    "price": 197.83,
+    "rating": 1.5,
+    "imageURL": "http://dummyimage.com/101x100.png/dddddd/000000",
+  }, {
+    "name": "Krystle Thormwell",
+    "cuisine": "Italian",
+    "price": 496.05,
+    "rating": 1.7,
+    "imageURL": "http://dummyimage.com/237x100.png/cc0000/ffffff",
+  }, {
+    "name": "Lizette Lawee",
+    "cuisine": "French",
+    "price": 424.82,
+    "rating": 1.4,
+    "imageURL": "http://dummyimage.com/240x100.png/ff4444/ffffff",
+  }, {
+    "name": "Glyn Beacham",
+    "cuisine": "Indian",
+    "price": 135.56,
+    "rating": 2.9,
+    "imageURL": "http://dummyimage.com/137x100.png/ff4444/ffffff",
+  }, {
+    "name": "Imelda Chicotti",
+    "cuisine": "Japanese",
+    "price": 156.24,
+    "rating": 3.7,
+    "imageURL": "http://dummyimage.com/206x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Miranda Wheal",
+    "cuisine": "Japanese",
+    "price": 49.65,
+    "rating": 1.4,
+    "imageURL": "http://dummyimage.com/204x100.png/dddddd/000000",
+  }, {
+    "name": "Claresta Profit",
+    "cuisine": "French",
+    "price": 127.39,
+    "rating": 4.6,
+    "imageURL": "http://dummyimage.com/200x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Hailey Brech",
+    "cuisine": "Mexican",
+    "price": 296.52,
+    "rating": 3.3,
+    "imageURL": "http://dummyimage.com/121x100.png/cc0000/ffffff",
+  }, {
+    "name": "Evanne Toppin",
+    "cuisine": "Greek",
+    "price": 261.06,
+    "rating": 1.8,
+    "imageURL": "http://dummyimage.com/236x100.png/dddddd/000000",
+  }, {
+    "name": "Matilda Tzarkov",
+    "cuisine": "Japanese",
+    "price": 73.14,
+    "rating": 2.4,
+    "imageURL": "http://dummyimage.com/216x100.png/cc0000/ffffff",
+  }, {
+    "name": "Tani McCoish",
+    "cuisine": "Indian",
+    "price": 436.46,
+    "rating": 2.3,
+    "imageURL": "http://dummyimage.com/203x100.png/cc0000/ffffff",
+  }, {
+    "name": "Moore Ciccotti",
+    "cuisine": "American",
+    "price": 322.94,
+    "rating": 2.9,
+    "imageURL": "http://dummyimage.com/103x100.png/ff4444/ffffff",
+  }, {
+    "name": "Karyl Loyley",
+    "cuisine": "American",
+    "price": 25.42,
+    "rating": 2.5,
+    "imageURL": "http://dummyimage.com/188x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Maddie Eakley",
+    "cuisine": "Italian",
+    "price": 132.44,
+    "rating": 1.6,
+    "imageURL": "http://dummyimage.com/191x100.png/dddddd/000000",
+  }, {
+    "name": "Fonzie Egre",
+    "cuisine": "Chinese",
+    "price": 123.21,
+    "rating": 2.8,
+    "imageURL": "http://dummyimage.com/221x100.png/dddddd/000000",
+  }, {
+    "name": "Trudi Twigg",
+    "cuisine": "French",
+    "price": 73.97,
+    "rating": 4.7,
+    "imageURL": "http://dummyimage.com/163x100.png/dddddd/000000",
+  }, {
+    "name": "Jessey Wilcot",
+    "cuisine": "Thai",
+    "price": 441.19,
+    "rating": 4.4,
+    "imageURL": "http://dummyimage.com/207x100.png/dddddd/000000",
+  }, {
+    "name": "Madelina Feldbaum",
+    "cuisine": "Italian",
+    "price": 22.63,
+    "rating": 3.5,
+    "imageURL": "http://dummyimage.com/106x100.png/dddddd/000000",
+  }, {
+    "name": "Cart Rennard",
+    "cuisine": "Italian",
+    "price": 43.38,
+    "rating": 1.6,
+    "imageURL": "http://dummyimage.com/139x100.png/ff4444/ffffff",
+  }, {
+    "name": "Karel Yoxall",
+    "cuisine": "Italian",
+    "price": 118.89,
+    "rating": 2.7,
+    "imageURL": "http://dummyimage.com/208x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Damiano Muat",
+    "cuisine": "Mexican",
+    "price": 446.7,
+    "rating": 3.9,
+    "imageURL": "http://dummyimage.com/236x100.png/cc0000/ffffff",
+  }, {
+    "name": "Rowen Barthelme",
+    "cuisine": "American",
+    "price": 369.32,
+    "rating": 3.9,
+    "imageURL": "http://dummyimage.com/157x100.png/ff4444/ffffff",
+  }, {
+    "name": "Aundrea McFade",
+    "cuisine": "American",
+    "price": 180.43,
+    "rating": 3.5,
+    "imageURL": "http://dummyimage.com/213x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Lucila Jefford",
+    "cuisine": "Thai",
+    "price": 487.41,
+    "rating": 1.9,
+    "imageURL": "http://dummyimage.com/103x100.png/cc0000/ffffff",
+  }, {
+    "name": "Ansley Deighton",
+    "cuisine": "Mexican",
+    "price": 387.39,
+    "rating": 1.8,
+    "imageURL": "http://dummyimage.com/115x100.png/cc0000/ffffff",
+  }, {
+    "name": "Nadia Beardmore",
+    "cuisine": "Greek",
+    "price": 264.39,
+    "rating": 4.0,
+    "imageURL": "http://dummyimage.com/197x100.png/ff4444/ffffff",
+  }, {
+    "name": "Liuka Calender",
+    "cuisine": "Italian",
+    "price": 454.02,
+    "rating": 1.5,
+    "imageURL": "http://dummyimage.com/128x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Ingrim Grishenkov",
+    "cuisine": "Vietnamese",
+    "price": 329.15,
+    "rating": 1.9,
+    "imageURL": "http://dummyimage.com/248x100.png/ff4444/ffffff",
+  }, {
+    "name": "Daniele Gavriel",
+    "cuisine": "Japanese",
+    "price": 468.4,
+    "rating": 1.4,
+    "imageURL": "http://dummyimage.com/109x100.png/ff4444/ffffff",
+  }, {
+    "name": "Brigida Sprason",
+    "cuisine": "Italian",
+    "price": 25.26,
+    "rating": 2.4,
+    "imageURL": "http://dummyimage.com/239x100.png/dddddd/000000",
+  }, {
+    "name": "Dorrie Andreoletti",
+    "cuisine": "Thai",
+    "price": 174.14,
+    "rating": 3.2,
+    "imageURL": "http://dummyimage.com/177x100.png/ff4444/ffffff",
+  }, {
+    "name": "Cullan Mitchely",
+    "cuisine": "Chinese",
+    "price": 111.65,
+    "rating": 1.9,
+    "imageURL": "http://dummyimage.com/231x100.png/cc0000/ffffff",
+  }, {
+    "name": "Domenic Peatheyjohns",
+    "cuisine": "Italian",
+    "price": 485.24,
+    "rating": 1.6,
+    "imageURL": "http://dummyimage.com/126x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Eddy Hollindale",
+    "cuisine": "Japanese",
+    "price": 484.35,
+    "rating": 3.7,
+    "imageURL": "http://dummyimage.com/123x100.png/cc0000/ffffff",
+  }, {
+    "name": "Robin Culpan",
+    "cuisine": "Greek",
+    "price": 347.3,
+    "rating": 4.8,
+    "imageURL": "http://dummyimage.com/106x100.png/5fa2dd/ffffff",
+  }, {
+    "name": "Derry Jansky",
+    "cuisine": "American",
+    "price": 468.84,
+    "rating": 4.3,
+    "imageURL": "http://dummyimage.com/229x100.png/dddddd/000000",
+  }, {
+    "name": "Clemmy Veazey",
+    "cuisine": "Greek",
+    "price": 214.27,
+    "rating": 4.2,
+    "imageURL": "http://dummyimage.com/120x100.png/ff4444/ffffff",
+  }];
+
+const images = [
+    "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg",
+    "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg",
+    "https://images.pexels.com/photos/1449773/pexels-photo-1449773.jpeg",
+    "https://images.pexels.com/photos/1383776/pexels-photo-1383776.jpeg",
+    "https://images.pexels.com/photos/1322184/pexels-photo-1322184.jpeg",
+    "https://images.pexels.com/photos/1237073/pexels-photo-1237073.jpeg",
+    "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg",
+    "https://images.pexels.com/photos/2290070/pexels-photo-2290070.jpeg",
+];
+
+
+function getRandomNumber() {
+    const randomNumber = Math.random() * 1000 + 1;
+    const fixedNumber = randomNumber.toFixed(2);
+    return parseFloat(fixedNumber);
+  }
+
+const menuItems = [
+    {
+        name: "Burger Sliders",
+        imageURL: "https://images.spoonacular.com/file/wximages/419357-312x231.png",
+        price: getRandomNumber(),
+    },
+    {
+        name: "Combo Pizza",
+        imageURL: "https://images.spoonacular.com/file/wximages/387582-312x231.png",
+        price: getRandomNumber(),
+    },
+    {
+        name: "Chicken Strips",
+        imageURL: "https://spoonacular.com/menuItemImages/chicken-strips.jpg",
+        price: getRandomNumber(),
+    },
+    {
+        name: "Roadhouse Fish Fry",
+        imageURL: "https://images.spoonacular.com/file/wximages/417246-312x231.jpg",
+        price: getRandomNumber(),
+    },
+    {
+        name: "Chopped Power Salad-Lunch",
+        imageURL: "https://spoonacular.com/menuItemImages/salad.jpg",
+        price: getRandomNumber(),
+    },
+    {
+        name: "Mini White Cake Donut, Chocolate Iced w/ Rainbow Sprinkles",
+        imageURL: "https://images.spoonacular.com/file/wximages/381957-312x231.jpg",
+        price: getRandomNumber(),
+    },
+    {
+        name: "Chicken Penne Pasta",
+        imageURL: "https://images.spoonacular.com/file/wximages/227166-312x231.jpg",
+        price: getRandomNumber(),
+    },
+    {
+        name: "Sushi Sampler, Yellowtail",
+        imageURL: "https://spoonacular.com/menuItemImages/sushi-rolls.jpg",
+        price: getRandomNumber(),
+    },
+    {
+        name: "Pho Noodle (Bowl)",
+        imageURL: "https://images.spoonacular.com/file/wximages/312412-312x231.jpg",
+        price: getRandomNumber(),
+    },
+    {
+        name: "Double-Glazed Baby Back Ribs - Full Rack Platter w/ BBQ Sauce",
+        imageURL: "https://images.spoonacular.com/file/wximages/317664-312x231.jpg",
+        price: getRandomNumber(),
+    },
+];
+
+const final = array.map((restaurant) => ({
+    name: restaurant.name,
+    cuisine: restaurant.cuisine,
+    price: restaurant.price,
+    rating: restaurant.rating,
+    bannerURL: images[Math.floor(Math.random() * images.length)],
+    menuItems,
+}));
+
+await connect(process.env.MONGODB_URL);
+const res = await Restaurant.create(final);
+// const res = await
+
+console.log(res);

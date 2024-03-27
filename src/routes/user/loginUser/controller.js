@@ -1,6 +1,6 @@
 import { User } from "../../../../db/models/index.js";
 import jwt from "jsonwebtoken";
-import { LoginUserSchema } from "../../../frameworks/schemaValidators/index.js";
+import { SchemaValidators } from "../../../frameworks/index.js";
 import { fromZodError } from "zod-validation-error";
 import { ZodError } from "zod";
 
@@ -9,7 +9,7 @@ const loginUser = async (req, res) => {
     const response = { hasError: true, title: "Error", data: null, message: "An error occured while logging in" };
 
     try {
-        const { email, phoneNo, password } = LoginUserSchema.parse(req.body);
+        const { email, phoneNo, password } = SchemaValidators.LoginUserSchema.parse(req.body);
 
         if (!email && !phoneNo) {
             response.message = "Either Email or Phone number is required";
