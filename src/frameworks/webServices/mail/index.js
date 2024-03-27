@@ -15,14 +15,18 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function sendOTPEmail(email, otp) {
+    if (!email || !otp) {
+      throw new Error("sendOTPEmail(): Email and OTP are required to send OTP Email");
+    }
+
     console.log(`Sending mail to email: ${email}, OTP: ${otp}`);
     let success = false;
 
     try {
         const messageInfo = await transporter.sendMail({
             from: {
-                name:"Just Eat",
-                address:"suryaharsh279@gmail.com",
+                name: "Just Eat",
+                address: "suryaharsh279@gmail.com",
             },
             to: email,
             subject: "OTP Verification",
@@ -30,7 +34,7 @@ export async function sendOTPEmail(email, otp) {
             html: getHtmlBody(otp),
         });
 
-        success = true;
+      success = true;
       console.log(`OTP Sent successfully to email: ${email}, OTP: ${otp}`);
       console.log(`Message Info: ${JSON.stringify(messageInfo)}`);
     } catch (error) {

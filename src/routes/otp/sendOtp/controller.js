@@ -20,17 +20,15 @@ const sendOtp = async (req, res) => {
         let otp = Utils.generateOTP();
 
         let result = await OTP.findOne({ otp });
+
         while (result) { // This is to handle duplicate OTPs
           otp = Utils.generateOTP();
           result = await OTP.findOne({ otp });
         }
+
         const otpPayload = { email, otp };
 
-        const otpInfo = await OTP.create(otpPayload);
-        if (!otpInfo?._id) {
-          response.message = "An error occured while creating OTP";
-          return response;
-        }
+        await OTP.create(otpPayload);
 
         const isOtpSent = await Mail.sendOTPEmail(email, otp);
         if (!isOtpSent) {
