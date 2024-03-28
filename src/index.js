@@ -3,7 +3,9 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import routes from "./routes/index.js";
 import "dotenv/config";
-import { connectToMongoose } from "./frameworks/utils/index.js";
+import { connectToMongoose, validateEnv } from "./frameworks/utils/index.js";
+
+validateEnv();
 
 const app = express();
 

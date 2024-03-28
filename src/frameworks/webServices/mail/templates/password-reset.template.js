@@ -1,11 +1,12 @@
-export function getHtmlBody(otp) {
+export function getPasswordResetLinkHtmlBody(passwordResetLink) {
     return `<!DOCTYPE html>
     <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>OTP Email</title>
+        <title>Password Reset</title>
         <style>
+            /* Basic styling for email body */
             body {
                 font-family: Arial, sans-serif;
                 background-color: #f4f4f4;
@@ -26,20 +27,18 @@ export function getHtmlBody(otp) {
             p {
                 color: #666;
             }
-            .otp {
-                font-size: 24px;
-                font-weight: bold;
+            .reset-link {
                 color: #007bff;
             }
         </style>
     </head>
     <body>
         <div class="container">
-            <h2>OTP Verification</h2>
-            <p>Your One-Time Password (OTP) for verification is:</p>
-            <p class="otp">${otp}</p>
-            <p>Please use this OTP to complete your verification process.</p>
-            <p>If you did not request this OTP, please ignore this email.</p>
+            <h2>Password Reset</h2>
+            <p>You have requested to reset your password. Please click the link below to reset your password:</p>
+            <p><a class="reset-link" href="${passwordResetLink}">Reset Password</a></p>
+            <p><strong>Note:</strong> This link is valid for 1 hour only.</p>
+            <p>If you did not request a password reset, please ignore this email.</p>
         </div>
     </body>
     </html>

@@ -1,6 +1,7 @@
 import { z } from "zod";
+import { EmailSchema } from "./common/email.js";
 
-export const RegisterUserSchema = z.object({
+export const RegisterUserSchema = EmailSchema.extend({
     phoneNo: z.string({ invalid_type_error: "Phone number must be a string", required_error: "Phone number is required" })
         .min(10, { message: "Phone number must be 10 digits" })
         .max(10, { message: "Phone number must be 10 digits" }),
@@ -12,8 +13,6 @@ export const RegisterUserSchema = z.object({
     lastName: z.string({ invalid_type_error: "Last name must be a string" })
         .min(1, { message: "Last name must be atleast 1 character long" })
         .optional(),
-    email: z.string({ invalid_type_error: "Email must be a string", required_error: "Email is required" })
-        .email({ message: "Invalid email" }),
     password: z.string({ invalid_type_error: "Password must be a string", required_error: "Password is required" })
         .min(8, { message: "Password must be atleast 8 characters long" }),
 })

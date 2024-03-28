@@ -13,7 +13,7 @@
                 "<node_internals>/**"
             ],
             "cwd": "${workspaceFolder}",
-            "program": "index.js", // https://stackoverflow.com/a/72575923
+            "program": "src/index.js", // https://stackoverflow.com/a/72575923
             "env": {
                 "NODE_ENV": "local"
             }

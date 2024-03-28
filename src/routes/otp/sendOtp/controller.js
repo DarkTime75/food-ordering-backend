@@ -8,7 +8,10 @@ const sendOtp = async (req, res) => {
     const response = { hasError: true, title: "Error", data: null, message: "An error occured while sending OTP" };
 
     try {
-        const { email } = SchemaValidators.SendOTPSchema.parse(req.body);
+        const { email } = SchemaValidators
+          .EmailSchema
+          .strict({ message: "Please input the following keys only: email" })
+          .parse(req.body);
 
         const checkUserPresent = await User.findOne({ email });
 

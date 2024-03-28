@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { registerUserRouter, loginUserRouter, logoutUserRouter } from "./user/index.js";
 import { validateOtpRouter, sendOtpRouter } from "./otp/index.js";
+import { requestPasswordResetRouter, resetPasswordRouter } from "./password/index.js";
 import { requireAuth } from "../middlewares/index.js";
 
 export default () => {
@@ -14,6 +15,9 @@ export default () => {
     // OTP Routes
     app.use("/otp/send", sendOtpRouter);
     app.use("/otp/validate", validateOtpRouter);
+
+    app.use("/password/request-reset", requestPasswordResetRouter);
+    app.use("/password/reset", resetPasswordRouter);
 
     return app;
 };
