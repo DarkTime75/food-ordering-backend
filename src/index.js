@@ -12,7 +12,10 @@ const app = express();
 await connectToMongoose();
 
 // middlewares
-app.use(cors({ origin: process.env.CORS_ORIGIN }, { credentials: true }));
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true,
+}));
 app.use(cookieParser());
 app.use(express.json({
   limit: "20kb",
