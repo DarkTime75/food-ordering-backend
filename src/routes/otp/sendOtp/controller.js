@@ -13,10 +13,10 @@ const sendOtp = async (req, res) => {
           .strict({ message: "Please input the following keys only: email" })
           .parse(req.body);
 
-        const checkUserPresent = await User.findOne({ email });
+        const userInfo = await User.findOne({ email });
 
-        if (checkUserPresent) {
-          response.message = "User already exists";
+        if (!userInfo?._id) {
+          response.message = "User doesn't exist";
           return response;
         }
 
