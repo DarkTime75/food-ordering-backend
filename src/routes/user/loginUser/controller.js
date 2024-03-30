@@ -16,7 +16,7 @@ const loginUser = async (req, res) => {
             return response;
         }
 
-        if (res.cookies.access_token) {
+        if (req.cookies.access_token) {
             response.message = "User already logged in";
             return response;
         }
