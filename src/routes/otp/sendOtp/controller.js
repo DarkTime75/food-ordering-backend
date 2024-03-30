@@ -31,7 +31,8 @@ const sendOtp = async (req, res) => {
 
         const otpPayload = { email, otp };
 
-        await OTP.create(otpPayload);
+        const otpResult = await OTP.create(otpPayload);
+        await otpResult.save();
 
         const isOtpSent = await Mail.sendOTPEmail(email, otp);
         if (!isOtpSent) {
