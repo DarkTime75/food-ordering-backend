@@ -29,10 +29,7 @@ const sendOtp = async (req, res) => {
           result = await OTP.findOne({ otp });
         }
 
-        const otpPayload = { email, otp };
-
-        const otpResult = await OTP.create(otpPayload);
-        await otpResult.save();
+        await new OTP({ email, otp }).save();
 
         const isOtpSent = await Mail.sendOTPEmail(email, otp);
         if (!isOtpSent) {
