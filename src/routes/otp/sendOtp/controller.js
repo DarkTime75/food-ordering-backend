@@ -1,4 +1,4 @@
-import { OTP, User } from "../../../../db/models/index.js";
+import { OTP } from "../../../../db/models/index.js";
 import { SchemaValidators, Utils, Mail } from "../../../frameworks/index.js";
 import { ZodError } from "zod";
 import { fromZodError } from "zod-validation-error";
@@ -13,13 +13,6 @@ const sendOtp = async (req, res) => {
           .strict({ message: "Please input the following keys only: email" })
           .parse(req.body);
 
-        const userInfo = await User.findOne({ email });
-
-        if (!userInfo?._id) {
-          response.message = "User doesn't exist";
-          return response;
-        }
-
         let otp = Utils.generateOTP();
 
         let result = await OTP.findOne({ otp });
@@ -29,13 +22,13 @@ const sendOtp = async (req, res) => {
           result = await OTP.findOne({ otp });
         }
 
-        await new OTP({ email, otp }).save();
-
         const isOtpSent = await Mail.sendOTPEmail(email, otp);
         if (!isOtpSent) {
           response.message = "An error occured while sending OTP";
           return response;
         }
+
+        await new OTP({ email, otp }).save();
 
         response.hasError = false;
         response.title = "OTP Sent";
