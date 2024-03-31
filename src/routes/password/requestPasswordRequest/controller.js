@@ -34,7 +34,7 @@ const requestPasswordReset = async (req, res) => {
               token: resetToken,
             }).save();
 
-            const passwordResetLink = `http://localhost:${process.env.PORT}/password/reset?token=${resetToken}&id=${userInfo._id}`;
+            const passwordResetLink = `http://localhost:${process.env.PORT}/password/forgot-password?token=${resetToken}&id=${userInfo._id}`;
 
             const isMailSent = await Mail.sendPasswordResetLink(email, passwordResetLink);
             if (isMailSent) {
