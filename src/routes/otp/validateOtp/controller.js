@@ -10,14 +10,14 @@ const validateOtp = async (req, res) => {
     try {
         const { email, otp } = SchemaValidators.ValidateOTPSchema.parse(req.body);
 
-        const otpResult = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+        const otpResult = await OTP.findOne({ email });
 
-        if (otpResult.length === 0) {
+        if (!otpResult?._id) {
             response.message = "No OTP found for this email";
             return response;
         }
 
-        if (otp !== otpResult[0].otp) {
+        if (otp !== otpResult.otp) {
             response.message = "Invalid OTP";
             return response;
         }

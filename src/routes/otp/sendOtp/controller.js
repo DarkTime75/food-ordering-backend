@@ -22,6 +22,11 @@ const sendOtp = async (req, res) => {
           result = await OTP.findOne({ otp });
         }
 
+        const otpResult = await OTP.findOne({ email });
+        if (otpResult) {
+          await otpResult.deleteOne();
+        }
+
         const isOtpSent = await Mail.sendOTPEmail(email, otp);
         if (!isOtpSent) {
           response.message = "An error occured while sending OTP";
