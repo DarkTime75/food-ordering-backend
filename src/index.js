@@ -13,7 +13,7 @@ await connectToMongoose();
 
 // middlewares
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: "https://justeat12.netlify.app/",
   credentials: true,
   withCredentials: true,
 }));
