@@ -3,3 +3,4 @@ export * from "./registerUser.js";
 export * from "./validateOtp.js";
 export * from "./resetPassword.js";
 export * from "./common/email.js";
+export * from "./listRestaurants.js";

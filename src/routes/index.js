@@ -2,6 +2,7 @@ import { Router } from "express";
 import { registerUserRouter, loginUserRouter, logoutUserRouter } from "./user/index.js";
 import { validateOtpRouter, sendOtpRouter } from "./otp/index.js";
 import { requestPasswordResetRouter, resetPasswordRouter } from "./password/index.js";
+import { listRestaurantsRouter } from "./restaurant/index.js";
 import { requireAuth } from "../middlewares/index.js";
 
 export default () => {
@@ -16,8 +17,12 @@ export default () => {
     app.use("/otp/send", sendOtpRouter);
     app.use("/otp/validate", validateOtpRouter);
 
+    // Password Routes
     app.use("/password/request-reset", requestPasswordResetRouter);
     app.use("/password/reset", resetPasswordRouter);
+
+    // Restaurant Routes
+    app.use("/restaurants/list", listRestaurantsRouter); // To list restaurants
 
     return app;
 };
