@@ -1,0 +1,1 @@
+export { default as listRestaurantsRouter } from "./listRestaurants/router.js";
