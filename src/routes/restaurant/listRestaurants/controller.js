@@ -9,7 +9,6 @@ export default async function listRestaurants(req, _) {
 
     try {
         const { pageNo, pageSize } = SchemaValidators.ListRestaurantsSchema.parse(req.body);
-
         const restaurants = await Restaurant.aggregate([
             {
                 $facet: {
