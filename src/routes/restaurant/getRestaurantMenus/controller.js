@@ -19,8 +19,10 @@ const getRestaurantMenus = async (req, res) => {
         response.hasError = false;
         response.title = "Restaurant Menus";
         response.message = "Restaurant menus fetched successfully";
-        response.data = restaurantMenus.menuItems;
-
+        response.data = {
+            menuItems: restaurantMenus.menuItems,
+        };
+        return response;
       } catch (err) {
         if (err instanceof ZodError) {
             const formattedError = fromZodError(err);
