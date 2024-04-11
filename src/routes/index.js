@@ -2,7 +2,7 @@ import { Router } from "express";
 import { registerUserRouter, loginUserRouter, logoutUserRouter } from "./user/index.js";
 import { validateOtpRouter, sendOtpRouter } from "./otp/index.js";
 import { requestPasswordResetRouter, resetPasswordRouter } from "./password/index.js";
-import { listRestaurantsRouter } from "./restaurant/index.js";
+import { listRestaurantsRouter, getRestaurantMenusRouter } from "./restaurant/index.js";
 import { requireAuth } from "../middlewares/index.js";
 
 export default () => {
@@ -23,6 +23,7 @@ export default () => {
 
     // Restaurant Routes
     app.use("/restaurants/list", listRestaurantsRouter); // To list restaurants
+    app.use("/restaurants/menus", getRestaurantMenusRouter); // To list restaurant menus,
 
     return app;
 };
