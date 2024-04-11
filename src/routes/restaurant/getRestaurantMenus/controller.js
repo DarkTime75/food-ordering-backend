@@ -5,7 +5,7 @@ import { fromZodError } from "zod-validation-error";
 
 // eslint-disable-next-line no-unused-vars
 const getRestaurantMenus = async (req, res) => {
-    const response = { hasError: true, title: "Error", data: null, message: "An error occured while sending password reset link" };
+    const response = { hasError: true, title: "Error", data: null, message: "error occured" };
 
     try {
         const { restaurantId } = SchemaValidators.GetRestaurantMenusSchema.parse(req.body);
