@@ -6,7 +6,7 @@ import { ZodError } from "zod";
 
 
 const loginUser = async (req, res) => {
-    const response = { hasError: true, title: "Error", data: null, message: "An error occured while logging in" };
+    const response = { hasError: true, title: "Error", data: null, email:"", message: "An error occured while logging in" };
 
     try {
         const { email, phoneNo, password } = SchemaValidators.LoginUserSchema.parse(req.body);
@@ -47,6 +47,7 @@ const loginUser = async (req, res) => {
         response.title = "Login Success";
         response.message = "Logged in successfully";
         response.data = { token };
+        response.email = email;
         return response;
     } catch (err) {
         if (err instanceof ZodError) {
