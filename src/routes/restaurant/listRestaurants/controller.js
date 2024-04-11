@@ -27,6 +27,7 @@ export default async function listRestaurants(req, _) {
                             input: "$dataList",
                             as: "restaurant",
                             in: {
+                                _id: "$$restaurant._id",
                                 name: "$$restaurant.name",
                                 cusine: "$$restaurant.cuisine",
                                 price: "$$restaurant.price",
