@@ -9,6 +9,7 @@ const getRestaurantMenus = async (req, res) => {
 
     try {
         const { restaurantId } = SchemaValidators.GetRestaurantMenusSchema.parse(req.body);
+        console.log(restaurantId);
 
         const restaurantMenus = await Restaurant.findById(restaurantId);
         if (!restaurantMenus?._id) {

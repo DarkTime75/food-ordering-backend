@@ -38,7 +38,7 @@ const loginUser = async (req, res) => {
 
         const token = jwt.sign({ userId: userInfo._id }, process.env.JWT_SECRET);
         res.cookie("access_token", token, {
-            httpOnly: true,
+            httpOnly: false,
             secure: process.env.NODE_ENV === "production",
             sameSite: "lax",
         });
@@ -62,3 +62,5 @@ const loginUser = async (req, res) => {
 };
 
 export default loginUser;
+
+
